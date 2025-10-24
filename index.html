@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock with Themes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="theme-buttons">
+        <button id="dark-theme-btn">🌙 Dark</button>
+        <button id="light-theme-btn">☀️ Light</button>
+    </div>
+    <main class="clock-container">
+        <div class="clock-box">
+            <div class="clock">
+                <div class="flip-digit" id="hours">12</div>
+                <div class="colon">:</div>
+                <div class="flip-digit" id="minutes">00</div>
+                <div class="colon">:</div>
+                <div class="flip-digit" id="seconds">00</div>
+                <span class="ampm" id="ampm">AM</span>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        function flipDigit(digitEl, newValue) {
+            if (digitEl.textContent === newValue) return;
+
+            digitEl.style.transform = 'rotateX(-90deg)';
+            setTimeout(() => {
+                digitEl.textContent = newValue;
+                digitEl.style.transform = 'rotateX(90deg)';
+                setTimeout(() => {
+                    digitEl.style.transform = 'rotateX(0deg)';
+                }, 50);
+            }, 250);
+        }
+
+        function updateClock() {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const seconds = now.getSeconds().toString().padStart(2, '0');
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = (hours % 12) || 12;
+            hours = hours.toString().padStart(2, '0');
+
+            flipDigit(document.getElementById('hours'), hours);
+            flipDigit(document.getElementById('minutes'), minutes);
+            flipDigit(document.getElementById('seconds'), seconds);
+            document.getElementById('ampm').textContent = ampm;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        const darkBtn = document.getElementById('dark-theme-btn');
+        const lightBtn = document.getElementById('light-theme-btn');
+
+        darkBtn.addEventListener('click', () => {
+            document.body.classList.remove('light');
+            document.body.classList.add('dark');
+        });
+
+        lightBtn.addEventListener('click', () => {
+            document.body.classList.remove('dark');
+            document.body.classList.add('light');
+        });
+
+        document.body.classList.add('light');
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,249 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Dark theme */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+.clock-box {
+  background-color: rgba(80,80,80,0.5);
+  padding: 4rem 5rem;
+  border-radius: 2rem;
+  backdrop-filter: blur(6px);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 40px rgba(0,0,0,0.5);
+}
+
+.clock {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem; 
+  color: white;
+}
+
+.ampm {
+  margin-left: 1rem;
+  font-size: 2rem;
+}
+
+.flip-digit {
+  display: inline-block;
+  width: 120px; 
+  height: 140px;
+  line-height: 140px;
+  text-align: center;
+  font-size: 5rem;
+  font-weight: 700;
+  background-color: rgba(0,0,0,0.5);
+  border-radius: 15px;
+  color: white;
+  transform-style: preserve-3d;
+  transition: transform 0.25s ease-in-out;
+  backface-visibility: hidden;
+  perspective: 400px;
+}
+
+.colon {
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+@media(max-width:768px){
+  .clock-box {
+    padding: 3rem 4rem;
+  }
+  .flip-digit {
+    width: 100px; 
+    height: 120px;
+    line-height: 120px;
+    font-size: 4rem;
+  }
+  .colon {
+    font-size: 4rem;
+  }
+  .ampm {
+    font-size: 1.8rem;
+  }
+}
+
+@media(max-width:480px){
+  .clock-box {
+    padding: 2rem 3rem;
+  }
+  .flip-digit {
+    width: 80px; 
+    height: 90px;
+    line-height: 90px;
+    font-size: 2.8rem;
+  }
+  .colon {
+    font-size: 2.8rem;
+  }
+  .ampm {
+    font-size: 1.5rem;
+  }
+}
+
+.theme-buttons {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 1rem;
+  z-index: 10;
+}
+
+.theme-buttons button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s, color 0.3s;
+}
+
+.theme-buttons button:hover {
+  opacity: 0.8;
+}
+
+/* Light Theme  */
+body.light {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    background: url('https://images.unsplash.com/photo-1525490829609-d166ddb58678?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2069') no-repeat center center fixed;
+    background-size: cover;
+}
+
+body.light .clock-box {
+  background-color:  rgba(240, 248, 255, 0.5);
+  padding: 4rem 5rem;
+  border-radius: 2rem;
+  backdrop-filter: blur(6px);
+  display: inline-flex;
+  justify-content: center;
+  align-items:center;
+  box-shadow: 0 0 40px rgba(70, 99, 172, 0.3);
+}
+
+body.light .clock {
+    display:flex;
+    align-items: center;
+    gap: 1.2rem;
+    color: white;
+}
+
+body.light .clock .ampm {
+    margin-left: 1rem;
+    font-size: 2rem;
+    color: #6e9cc8;
+}
+
+body.light .flip-digit {
+    display: inline-block;
+    width: 120px;
+    height: 140px;
+    line-height: 140px;
+    text-align: center;
+    font-size: 5rem;
+    font-weight: 700;
+    background-color: rgba(232, 236, 239, 0.8);
+    border-radius: 15px;
+    color: #6e9cc8;
+    transform-style: preserve-3d;
+    transition: transform 0.25s ease-in-out;
+    backface-visibility: hidden;
+    perspective: 400px;
+}
+
+body.light .colon {
+  font-size: 5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #6e9cc8;
+}
+
+@media(max-width:768px){
+  .clock-box {
+    padding: 3rem 4rem;
+  }
+  .flip-digit {
+    width: 100px; 
+    height: 120px;
+    line-height: 120px;
+    font-size: 4rem;
+  }
+  .colon {
+    font-size: 4rem;
+  }
+  .ampm {
+    font-size: 1.8rem;
+  }
+}
+
+@media(max-width:480px){
+  .clock-box {
+    padding: 2rem 3rem;
+  }
+  .flip-digit {
+    width: 80px; 
+    height: 90px;
+    line-height: 90px;
+    font-size: 2.8rem;
+  }
+  .colon {
+    font-size: 2.8rem;
+  }
+  .ampm {
+    font-size:1.5rem;
+  }
+}
+
+body.dark .theme-buttons button#dark-theme-btn {
+  background-color: #333;
+  color: white;
+}
+
+body.dark .theme-buttons button#light-theme-btn {
+  background-color: #fff;
+  color: #333;
+}
+
+body.light .theme-buttons button#dark-theme-btn {
+  background-color: #333;
+  color: white;
+}
+
+body.light .theme-buttons button#light-theme-btn {
+  background-color: #fff;
+  color: #333;
+}
+
+@media(max-width:480px){
+  .theme-buttons {
+    top: 0.5rem;
+    right: 0.5rem;
+    gap: 0.5rem;
+  }
+  .theme-buttons button {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.6rem;
+  }
+}
