@@ -23,8 +23,9 @@
                 <div class="flip-digit" id="minutes">00</div>
                 <div class="colon">:</div>
                 <div class="flip-digit" id="seconds">00</div>
-                <span class="ampm" id="ampm">AM</span>
+                <div class="ampm" id="ampm">AM</div>
             </div>
+            <canvas id="analogClock" aria-label="Analog clock" width="300" height="300"></canvas>
         </div>
     </main>
 
@@ -35,10 +36,7 @@
             digitEl.style.transform = 'rotateX(-90deg)';
             setTimeout(() => {
                 digitEl.textContent = newValue;
-                digitEl.style.transform = 'rotateX(90deg)';
-                setTimeout(() => {
-                    digitEl.style.transform = 'rotateX(0deg)';
-                }, 50);
+                digitEl.style.transform = 'rotateX(0deg)';
             }, 250);
         }
 
@@ -76,6 +74,9 @@
         document.body.classList.add('light');
 
     </script>
+
+    <script src="canvas-clock.js" defer></script>
+    
 </body>
 
 </html>

@@ -32,7 +32,7 @@ body {
 .clock {
   display: flex;
   align-items: center;
-  gap: 1.2rem; 
+  gap: 2rem; 
   color: white;
 }
 
@@ -246,4 +246,19 @@ body.light .theme-buttons button#light-theme-btn {
     font-size: 0.8rem;
     padding: 0.3rem 0.6rem;
   }
+}
+
+#analogClock {
+width: 300px; 
+height: 300px;
+display: block;
+margin: 12px 0 12px 60px;
+border-radius: 50%;
+box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+background: transparent; 
+}
+
+
+@media (max-width: 480px) {
+#analogClock { width: 220px; height: 220px; margin-left: 30px;}
 }
