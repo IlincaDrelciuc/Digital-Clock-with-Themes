@@ -9,41 +9,42 @@ html, body {
   font-family: 'Montserrat', sans-serif;
 }
 
-/* Dark theme */
 body {
   display: flex;
   justify-content: center;
   align-items: center;
   background: url('https://upload.wikimedia.org/wikipedia/commons/e/e1/FullMoon2010.jpg') no-repeat center center fixed;
   background-size: cover;
+  --clock-face: rgba(0, 0, 0, 0.55);
+  --clock-border: #ffffff;
+  --hour-color: #ffffff;
+  --minute-color: #ffffff;
+  --second-color: #ff5a5a;
+  --tick-color: #cccccc;
+  --audio-tick-hz: 880;
+  --audio-chime-hz: 660;
 }
 
 .clock-box {
-  background-color: rgba(80,80,80,0.5);
+  background-color: rgba(80, 80, 80, 0.5);
   padding: 4rem 5rem;
   border-radius: 2rem;
   backdrop-filter: blur(6px);
   display: inline-flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   box-shadow: 0 0 40px rgba(0,0,0,0.5);
 }
 
 .clock {
   display: flex;
   align-items: center;
-  gap: 1.2rem; 
+  gap: 2rem;
   color: white;
 }
 
-.ampm {
-  margin-left: 1rem;
-  font-size: 2rem;
-}
-
 .flip-digit {
-  display: inline-block;
-  width: 120px; 
+  width: 120px;
   height: 140px;
   line-height: 140px;
   text-align: center;
@@ -64,12 +65,111 @@ body {
   line-height: 1;
 }
 
-@media(max-width:768px){
+.ampm {
+  margin-left: 1rem;
+  font-size: 2rem;
+}
+
+#analogClock {
+  width: 300px;
+  height: 300px;
+  margin-left: 60px;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.theme-buttons {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.8rem;
+  z-index: 10;
+}
+
+.theme-buttons button {
+  padding: 0.5rem 0.9rem;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: opacity 0.3s;
+}
+
+.theme-buttons button:hover {
+  opacity: 0.8;
+}
+
+#sound-toggle-btn {
+  min-width: 140px;
+}
+
+.vol-label {
+  color: white;
+  font-weight: 600;
+  align-self: center;
+}
+
+#volume {
+  width: 110px;
+  cursor: pointer;
+}
+
+body.light {
+  background: url('https://images.unsplash.com/photo-1525490829609-d166ddb58678?auto=format&fit=crop&w=2069&q=80') no-repeat center center fixed;
+  background-size: cover;
+  --clock-face: rgba(255, 255, 255, 0.9);
+  --clock-border: #6e9cc8;
+  --hour-color: #6e9cc8;
+  --minute-color: #6e9cc8;
+  --second-color: #e63946;
+  --tick-color: #6e9cc8;
+  --audio-tick-hz: 1046.5;
+  --audio-chime-hz: 784;
+}
+
+body.light .clock-box {
+  background-color: rgba(240, 248, 255, 0.5);
+  box-shadow: 0 0 40px rgba(70, 99, 172, 0.3);
+}
+
+body.light .flip-digit {
+  background-color: rgba(232, 236, 239, 0.8);
+  color: #6e9cc8;
+}
+
+body.light .colon {
+  color: #6e9cc8;
+}
+
+body.light .ampm {
+  color: #6e9cc8;
+}
+
+body.light .vol-label {
+  color: #1f374e;
+}
+
+body.dark #dark-theme-btn,
+body.light #dark-theme-btn {
+  background-color: #333;
+  color: white;
+}
+
+body.dark #light-theme-btn,
+body.light #light-theme-btn {
+  background-color: #fff;
+  color: #333;
+}
+
+@media (max-width: 768px) {
   .clock-box {
     padding: 3rem 4rem;
   }
   .flip-digit {
-    width: 100px; 
+    width: 100px;
     height: 120px;
     line-height: 120px;
     font-size: 4rem;
@@ -77,17 +177,24 @@ body {
   .colon {
     font-size: 4rem;
   }
-  .ampm {
-    font-size: 1.8rem;
+  #analogClock {
+    width: 240px;
+    height: 240px;
+    margin-left: 40px;
   }
 }
 
-@media(max-width:480px){
+@media (max-width: 480px) {
   .clock-box {
     padding: 2rem 3rem;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  .clock {
+    gap: 1rem;
   }
   .flip-digit {
-    width: 80px; 
+    width: 80px;
     height: 90px;
     line-height: 90px;
     font-size: 2.8rem;
@@ -98,152 +205,21 @@ body {
   .ampm {
     font-size: 1.5rem;
   }
-}
-
-.theme-buttons {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  display: flex;
-  gap: 1rem;
-  z-index: 10;
-}
-
-.theme-buttons button {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.3s, color 0.3s;
-}
-
-.theme-buttons button:hover {
-  opacity: 0.8;
-}
-
-/* Light Theme  */
-body.light {
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    background: url('https://images.unsplash.com/photo-1525490829609-d166ddb58678?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2069') no-repeat center center fixed;
-    background-size: cover;
-}
-
-body.light .clock-box {
-  background-color:  rgba(240, 248, 255, 0.5);
-  padding: 4rem 5rem;
-  border-radius: 2rem;
-  backdrop-filter: blur(6px);
-  display: inline-flex;
-  justify-content: center;
-  align-items:center;
-  box-shadow: 0 0 40px rgba(70, 99, 172, 0.3);
-}
-
-body.light .clock {
-    display:flex;
-    align-items: center;
-    gap: 1.2rem;
-    color: white;
-}
-
-body.light .clock .ampm {
-    margin-left: 1rem;
-    font-size: 2rem;
-    color: #6e9cc8;
-}
-
-body.light .flip-digit {
-    display: inline-block;
-    width: 120px;
-    height: 140px;
-    line-height: 140px;
-    text-align: center;
-    font-size: 5rem;
-    font-weight: 700;
-    background-color: rgba(232, 236, 239, 0.8);
-    border-radius: 15px;
-    color: #6e9cc8;
-    transform-style: preserve-3d;
-    transition: transform 0.25s ease-in-out;
-    backface-visibility: hidden;
-    perspective: 400px;
-}
-
-body.light .colon {
-  font-size: 5rem;
-  font-weight: 700;
-  line-height: 1;
-  color: #6e9cc8;
-}
-
-@media(max-width:768px){
-  .clock-box {
-    padding: 3rem 4rem;
+  #analogClock {
+    width: 220px;
+    height: 220px;
+    margin-left: 0;
   }
-  .flip-digit {
-    width: 100px; 
-    height: 120px;
-    line-height: 120px;
-    font-size: 4rem;
-  }
-  .colon {
-    font-size: 4rem;
-  }
-  .ampm {
-    font-size: 1.8rem;
-  }
-}
-
-@media(max-width:480px){
-  .clock-box {
-    padding: 2rem 3rem;
-  }
-  .flip-digit {
-    width: 80px; 
-    height: 90px;
-    line-height: 90px;
-    font-size: 2.8rem;
-  }
-  .colon {
-    font-size: 2.8rem;
-  }
-  .ampm {
-    font-size:1.5rem;
-  }
-}
-
-body.dark .theme-buttons button#dark-theme-btn {
-  background-color: #333;
-  color: white;
-}
-
-body.dark .theme-buttons button#light-theme-btn {
-  background-color: #fff;
-  color: #333;
-}
-
-body.light .theme-buttons button#dark-theme-btn {
-  background-color: #333;
-  color: white;
-}
-
-body.light .theme-buttons button#light-theme-btn {
-  background-color: #fff;
-  color: #333;
-}
-
-@media(max-width:480px){
   .theme-buttons {
     top: 0.5rem;
     right: 0.5rem;
-    gap: 0.5rem;
+    gap: 0.4rem;
   }
   .theme-buttons button {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     padding: 0.3rem 0.6rem;
+  }
+  #volume {
+    width: 80px;
   }
 }
