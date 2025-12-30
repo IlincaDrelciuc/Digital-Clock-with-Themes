@@ -7,13 +7,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
   <div class="theme-buttons">
     <button id="dark-theme-btn" type="button">🌙 Dark</button>
     <button id="light-theme-btn" type="button">☀️ Light</button>
-
-    <!-- Stage 3: Audio controls -->
     <button id="sound-toggle-btn" type="button" aria-pressed="false">🔇 Sound: OFF</button>
     <label class="vol-label" for="volume">Vol</label>
     <input id="volume" type="range" min="0" max="100" value="35" />
@@ -32,16 +29,37 @@
 
       <canvas id="analogClock" aria-label="Analog clock" width="300" height="300"></canvas>
     </div>
+
+    <section class="media-panel" aria-label="Space time-lapse video">
+      <h2 class="media-title">Waves</h2>
+      <p class="media-desc">
+        Short looping video.
+      </p>
+
+      <div class="video-wrapper">
+        <video id="clockVideo" preload="metadata">
+          <source src="waves.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+
+        <div class="video-controls" aria-label="Video controls">
+          <button id="video-play-pause" type="button">▶ Play</button>
+          <button id="video-mute" type="button">🔈 Mute</button>
+          <span class="time-label">
+            <span id="video-current-time">0:00</span> /
+            <span id="video-duration">0:00</span>
+          </span>
+          <input id="video-seek" type="range" min="0" max="100" value="0">
+        </div>
+      </div>
+    </section>
   </main>
 
-  <!-- Your existing scripts -->
   <script src="canvas-clock.js" defer></script>
-
-  <!-- Stage 3: Audio API -->
   <script src="audio-clock.js" defer></script>
+  <script src="video-clock.js" defer></script>
 
   <script>
-    // DIGITAL CLOCK + THEME SWITCHING (kept as you had it)
     function flipDigit(digitEl, newValue) {
       if (digitEl.textContent === newValue) return;
       digitEl.style.transform = 'rotateX(-90deg)';
@@ -65,7 +83,6 @@
       flipDigit(document.getElementById('seconds'), seconds);
       document.getElementById('ampm').textContent = ampm;
 
-      // Let Stage 3 audio know the time tick happened
       window.dispatchEvent(new CustomEvent('clock:tick', { detail: { now } }));
     }
 

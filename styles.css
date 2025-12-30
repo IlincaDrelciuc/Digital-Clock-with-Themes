@@ -25,6 +25,13 @@ body {
   --audio-chime-hz: 660;
 }
 
+.clock-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
 .clock-box {
   background-color: rgba(80, 80, 80, 0.5);
   padding: 4rem 5rem;
@@ -164,6 +171,82 @@ body.light #light-theme-btn {
   color: #333;
 }
 
+.media-panel {
+  background-color: rgba(0, 0, 0, 0.55);
+  padding: 1.2rem 1.5rem;
+  border-radius: 1.2rem;
+  backdrop-filter: blur(5px);
+  color: #f5f5f5;
+  box-shadow: 0 0 30px rgba(0,0,0,0.4);
+  width: 100%;
+  max-width: 720px;
+}
+
+body.light .media-panel {
+  background-color: rgba(240, 248, 255, 0.7);
+  color: #1f374e;
+  box-shadow: 0 0 30px rgba(70, 99, 172, 0.3);
+}
+
+.media-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.2rem;
+}
+
+.media-desc {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-bottom: 0.7rem;
+}
+
+.video-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#clockVideo {
+  width: 100%;
+  border-radius: 0.9rem;
+  outline: none;
+}
+
+.video-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.video-controls button {
+  padding: 0.4rem 0.8rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+body.light .video-controls button {
+  background-color: #6e9cc8;
+  color: #fff;
+}
+
+body.dark .video-controls button {
+  background-color: #ffffff;
+  color: #222;
+}
+
+#video-seek {
+  flex: 1;
+  min-width: 120px;
+  cursor: pointer;
+}
+
+.time-label {
+  font-size: 0.8rem;
+}
+
 @media (max-width: 768px) {
   .clock-box {
     padding: 3rem 4rem;
@@ -182,9 +265,16 @@ body.light #light-theme-btn {
     height: 240px;
     margin-left: 40px;
   }
+  .media-panel {
+    margin: 0 1.5rem;
+  }
 }
 
 @media (max-width: 480px) {
+  body {
+    align-items: flex-start;
+    padding-top: 4rem;
+  }
   .clock-box {
     padding: 2rem 3rem;
     flex-direction: column;
@@ -221,5 +311,8 @@ body.light #light-theme-btn {
   }
   #volume {
     width: 80px;
+  }
+  .media-panel {
+    margin: 0 1rem 1.5rem 1rem;
   }
 }
